@@ -1,6 +1,5 @@
-/**
- * instagram
- */
+import java.io.*;
+import java.util.*;
 public class instagram {
     static class grafo{
         public int v;
@@ -8,25 +7,40 @@ public class instagram {
         grafo(int v){
             this.v=v;
             matriz=new int[v][v];
-            for(int i = 0; i < v; i++){
-                for(int j = 0; j<v; j++){
-                    matriz[i][j] = 0;
+        }
+        public void add(int x, int y, int value){
+            matriz[x][y] = value;
+        }
+        public void instagram(){
+            for(int i=0; i < v; i++){
+                for(int j =i; j< v; j++){
+                    if(matriz[i][j]==0){
+                        matriz[i][j]=1;
+                    }
                 }
             }
         }
-        public void add(int x, int y){
-            matriz[x][y] = 1;
+        public void print(){
+            for(int i=0; i < v; i++){
+                for(int j =0; j<v;j++){
+                    System.out.print(matriz[i][j]+" ");
+                }
+                System.out.println(" ");
+            }
         }
     }
     public static void main(String[] args) {
-        grafo red = new grafo(4);
-        red.add(0, 0);
-        red.add(0, 1);
-        red.add(0, 3);
-        red.add(1, 1);
-        red.add(1, 2);
-        red.add(2, 2);
-        red.add(2, 3);
-        red.add(3, 3);
+        Scanner sc = new Scanner(System.in);
+        int tamaño = sc.nextInt();
+        grafo red = new grafo(tamaño);
+        for(int i=0; i<tamaño; i++){
+           for(int j=0; j<tamaño;j++){
+               red.add(i, j, sc.nextInt());
+           } 
+        }
+        System.out.println(" ");       
+        red.instagram();
+        red.print();
+        sc.close();
     }
 }
